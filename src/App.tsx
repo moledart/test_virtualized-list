@@ -1,24 +1,51 @@
-import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { useState, useEffect } from 'react';
+import List from './components/List';
+
+export type Item = {
+  index: number;
+  name: string;
+};
 
 function App() {
+  const [count, setCount] = useState(1000);
+  const [items, setItems] = useState<Item[]>([]);
+  const [itemHeight, setItemHeight] = useState(40);
+
+  useEffect(() => {
+    setItems(
+      [...Array(count)].map((_, i) => ({
+        index: i,
+        name: `Item ${i}`,
+      }))
+    );
+  }, [count]);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <main>
+        <form>
+          <label>Number of items</label>
+          <input
+            type="number"
+            value={count.toString()}
+            onChange={(e) => setCount(Number(e.target.value))}
+          />
+          <label>Item height</label>
+          <input
+            type="number"
+            value={itemHeight.toString()}
+            onChange={(e) => setItemHeight(Number(e.target.value))}
+          />
+        </form>
+
+        <List
+          viewportHeight={400}
+          itemHeight={itemHeight}
+          itemCount={items.length}
+          items={items}
+        />
+      </main>
     </div>
   );
 }

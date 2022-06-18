@@ -1,16 +1,17 @@
 main {
+  box-sizing: border-box;
   height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: center;
   scroll-behavior: smooth;
   flex-direction: column;
   width: 767px;
+  max-width: 100%;
+  padding: 0 1rem;
   margin: 0 auto;
 }
 
 .viewport {
-  width: 100%;
   border: 1px solid #e2e8f0;
   overflow-y: scroll;
   border-radius: 0.5rem;
@@ -23,9 +24,10 @@ main {
 
 .row {
   box-sizing: border-box;
+
+  width: 100%;
   display: flex;
   border-bottom: 1px solid #e2e8f0;
-  width: 100%;
   align-items: center;
   padding: 0 1rem;
 }
